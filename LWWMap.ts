@@ -33,4 +33,16 @@ export class LWWMap<T> {
 
     return state;
   }
+
+  merge(state: State<T>): void {
+    for (const [key, remoteRegister] of Object.entries(state)) {
+      const localRegister = this.data.get(key);
+
+      if (localRegister) {
+        localRegister.merge(remoteRegister);
+      } else {
+        this.data.set(key, new LWWRegister(this.id, remoteRegister));
+      }
+    }
+  }
 }
