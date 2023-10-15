@@ -1,8 +1,8 @@
 import { LWWRegister } from "./LWWRegister";
 
-const aliceLww = new LWWRegister("alice", "");
+const aliceLww = new LWWRegister("alice", ["alice", 0, ""]);
 
-const bobLww = new LWWRegister("bob", "");
+const bobLww = new LWWRegister("bob", ["bob", 0, ""]);
 
 aliceLww.set("foo");
 aliceLww.set("foobar");

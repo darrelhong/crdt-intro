@@ -2,9 +2,9 @@ export class LWWRegister<T> {
   readonly id: string;
   state: [peerId: string, timestamp: number, value: T];
 
-  constructor(id: string, val: T) {
+  constructor(id: string, state: [string, number, T]) {
     this.id = id;
-    this.state = [id, 0, val];
+    this.state = state;
   }
 
   get(): T {
