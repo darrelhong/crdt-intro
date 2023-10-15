@@ -1,5 +1,5 @@
 import { LWWRegister } from "./LWWRegister";
-import { State } from "./interfaces";
+import { State, Value } from "./interfaces";
 
 export class LWWMap<T> {
   readonly id: string;
@@ -11,5 +11,26 @@ export class LWWMap<T> {
     for (const [key, register] of Object.entries(state)) {
       this.data.set(key, new LWWRegister(this.id, register));
     }
+  }
+
+  get value(): Value<T> {
+    const value: Value<T> = {};
+
+    for (const [key, register] of this.data.entries()) {
+      if (register.value !== null) {
+        value[key] = register.value;
+      }
+    }
+    return value;
+  }
+
+  get state(): State<T> {
+    const state: State<T> = {};
+
+    for (const [key, register] of this.data.entries()) {
+      state[key] = register.state;
+    }
+
+    return state;
   }
 }

@@ -7,7 +7,7 @@ export class LWWRegister<T> {
     this.state = state;
   }
 
-  get(): T {
+  get value(): T {
     return this.state[2];
   }
 

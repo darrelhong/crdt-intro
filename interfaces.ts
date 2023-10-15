@@ -6,7 +6,7 @@ interface CRDT<T, S> {
   merge(state: S): void;
 }
 
-type Value<T> = {
+export type Value<T> = {
   [key: string]: T;
 };
 
