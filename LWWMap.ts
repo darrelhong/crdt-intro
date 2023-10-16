@@ -45,4 +45,25 @@ export class LWWMap<T> {
       }
     }
   }
+
+  set(key: string, value: T): void {
+    const register = this.data.get(key);
+
+    if (register) {
+      register.set(value);
+    }
+    this.data.set(key, new LWWRegister(this.id, [this.id, 1, value]));
+  }
+
+  get(key: string): T | null | undefined {
+    return this.data.get(key)?.value;
+  }
+
+  delete(key: string): void {
+    this.data.get(key)?.set(null);
+  }
+
+  has(key: string): boolean {
+    return this.data[key] !== null;
+  }
 }
